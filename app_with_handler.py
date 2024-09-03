@@ -14,6 +14,7 @@
 
 import os
 import sys
+import openai
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -40,12 +41,16 @@ app = Flask(__name__)
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
+openai.api_key = os.getenv("OPENAI_API_KEY", None)
 if channel_secret is None:
     print('Specify LINE_CHANNEL_SECRET as environment variable.')
     sys.exit(1)
 if channel_access_token is None:
     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
+
+AI_GUIDELINES = '你現在是台灣新住民的專屬隨身問答助理，專注於幫助新來的居民解決生活中的各種問題。請根據用戶的語言選擇（繁體中文、簡體中文、英文、越南文等）回應他們的問題。你的回答應該簡單易懂，涵蓋以下幾個領域：1. 語言支持：回答用戶問題時，根據用戶的語言需求提供對應語言的回應。2. 生活資訊：提供有關台灣的日常生活、居住、交通、購物等資訊。3. 文化習俗：介紹台灣的文化、節慶和習俗，幫助用戶適應本地文化。4. 就業機會：提供關於工作機會、求職技巧和職場文化的資訊。5. 醫療服務：解答關於醫療系統、就醫流程和健康保險的問題。6. 戶政手續：指導用戶如何辦理居留證、工作證等必要的官方文件。7. 教育資源：提供有關學校、語言學習和其他教育資源的信息。每次回答時，請確保用語簡潔明瞭，並考慮到新住民可能對台灣的生活和制度不太熟悉。請根據用戶的具體需求，提供最合適的解決方案或建議。'
+
 
 handler = WebhookHandler(channel_secret)
 
@@ -73,15 +78,43 @@ def callback():
 
 
 @handler.add(MessageEvent, message=TextMessageContent)
-def message_text(event):
-    with ApiClient(configuration) as api_client:
-        line_bot_api = MessagingApi(api_client)
-        line_bot_api.reply_message_with_http_info(
-            ReplyMessageRequest(
-                reply_token=event.reply_token,
-                messages=[TextMessage(text=event.message.text)]
-            )
+def handle_message(event):
+    user_message = event.message.text
+
+    # 创建一个 prompt，将 AI_GUIDELINES 和用户消息结合
+    prompt = f"{AI_GUIDELINES}\nUser: {user_message}\nAI:"
+
+    try:
+        # 调用 OpenAI API 生成回复
+        response = openai.Completion.create(
+            engine="gpt-4",  # 或者使用 gpt-4
+            prompt=prompt,
+            max_tokens=150,
+            temperature=0.7,
         )
+
+        # 提取并整理回复内容
+        ai_reply = response.choices[0].text.strip()
+
+    except Exception as e:
+        # 处理任何异常并设置错误回复
+        ai_reply = "抱歉，目前無法提供服務，請稍後再試。"
+
+    # 使用 Line Messaging API 将 AI 的回复发送给用户
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=ai_reply)
+    )
+     
+#def message_text(event):
+#    with ApiClient(configuration) as api_client:
+#        line_bot_api = MessagingApi(api_client)
+#        line_bot_api.reply_message_with_http_info(
+#            ReplyMessageRequest(
+#                reply_token=event.reply_token,
+#                messages=[TextMessage(text=event.message.text)]
+#            )
+#        )
 
 
 if __name__ == "__main__":
