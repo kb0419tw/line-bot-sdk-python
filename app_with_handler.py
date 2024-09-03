@@ -85,7 +85,7 @@ def handle_message(event):
 
     try:
         # 调用 OpenAI API 生成回复
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             engine="gpt-4",  # 或者使用 gpt-4
             prompt=prompt,
             max_tokens=150,
