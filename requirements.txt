@@ -1,3 +1,4 @@
 gunicorn
 Flask
 line_bot_sdk
+openai
