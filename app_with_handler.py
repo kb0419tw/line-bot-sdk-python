@@ -92,14 +92,11 @@ def handle_message(event):
         #    temperature=0.7,
         #)
         response = openai.chat.completions.create(
+            model="gpt-4",
             messages=[
-            {
-                "role": "user",
-                "content": "Say this is a test",
-            }
+              {"role": "system", "content": AI_GUIDELINES},
+              {"role": "user", "content": user_message}
             ],
-            model="gpt-3.5-turbo",
-            prompt=prompt,
             max_tokens=150,
             temperature=0.7
         )
