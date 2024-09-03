@@ -100,9 +100,12 @@ def handle_message(event):
         ai_reply = "我現在有點不太舒服，晚點回覆你喔！"
 
     # 使用 Line Messaging API 将 AI 的回复发送给用户
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=ai_reply)
+    with ApiClient(configuration) as api_client:
+        line_bot_api = MessagingApi(api_client)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=ai_reply)
+        )
     )
      
 #def message_text(event):
