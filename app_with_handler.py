@@ -85,11 +85,23 @@ def handle_message(event):
 
     try:
         # 调用 OpenAI API 生成回复
+        #response = openai.chat.completions.create(
+        #    engine="gpt-4",  # 或者使用 gpt-4
+        #    prompt=prompt,
+        #    max_tokens=150,
+        #    temperature=0.7,
+        #)
         response = openai.chat.completions.create(
-            engine="gpt-4",  # 或者使用 gpt-4
+            messages=[
+            {
+                "role": "user",
+                "content": "Say this is a test",
+            }
+            ],
+            model="gpt-3.5-turbo",
             prompt=prompt,
             max_tokens=150,
-            temperature=0.7,
+            temperature=0.7
         )
 
         # 提取并整理回复内容
