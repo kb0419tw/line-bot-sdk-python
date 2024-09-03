@@ -102,9 +102,11 @@ def handle_message(event):
     # 使用 Line Messaging API 将 AI 的回复发送给用户
     with ApiClient(configuration) as api_client:
         line_bot_api = MessagingApi(api_client)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=ai_reply)
+        line_bot_api.reply_message_with_http_info(
+            ReplyMessageRequest(
+                reply_token=event.reply_token,
+                messages=[TextMessage(text=ai_reply)]
+            )
         )
      
 #def message_text(event):
