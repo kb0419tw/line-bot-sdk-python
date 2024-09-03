@@ -97,8 +97,8 @@ def handle_message(event):
 
     except Exception as e:
         # 处理任何异常并设置错误回复
-        ai_reply = "我現在有點不太舒服，晚點回覆你喔！"
-     　 print(f"Error: {e}")
+        ai_reply = "請至下列網站取得相關資訊哦:\nhttps://ifi.immigration.gov.tw/wSite/mp?mp=1"
+        print(f"Error: {e}")
 
     # 使用 Line Messaging API 将 AI 的回复发送给用户
     with ApiClient(configuration) as api_client:
