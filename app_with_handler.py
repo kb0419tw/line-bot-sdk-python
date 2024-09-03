@@ -102,11 +102,11 @@ def handle_message(event):
         )
 
         # 提取并整理回复内容
-        ai_reply = response.choices[0].message
+        ai_reply = response.choices[0].message['content']
 
     except Exception as e:
         # 处理任何异常并设置错误回复
-        ai_reply = "請至下列網站取得相關資訊哦:\nhttps://ifi.immigration.gov.tw/wSite/mp?mp=1"
+        ai_reply = "你可以到這個網站取得相關資訊哦：\nhttps://ifi.immigration.gov.tw/wSite/mp?mp=1"
         print(f"Error: {e}")
 
     # 使用 Line Messaging API 将 AI 的回复发送给用户
