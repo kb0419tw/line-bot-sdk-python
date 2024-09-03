@@ -98,7 +98,7 @@ def handle_message(event):
 
     except Exception as e:
         # 处理任何异常并设置错误回复
-        ai_reply = "抱歉，目前無法提供服務，請稍後再試。"
+        ai_reply = "我現在有點不太舒服，晚點回覆你喔！"
 
     # 使用 Line Messaging API 将 AI 的回复发送给用户
     line_bot_api.reply_message(
