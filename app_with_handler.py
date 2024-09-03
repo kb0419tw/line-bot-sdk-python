@@ -102,7 +102,7 @@ def handle_message(event):
         )
 
         # 提取并整理回复内容
-        ai_reply = response.choices[0].text.strip()
+        ai_reply = response.choices[0].message.strip()
 
     except Exception as e:
         # 处理任何异常并设置错误回复
