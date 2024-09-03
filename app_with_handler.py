@@ -19,6 +19,7 @@ from argparse import ArgumentParser
 
 from flask import Flask, request, abort
 from linebot.v3 import (
+     LineBotApi,
      WebhookHandler
 )
 from linebot.v3.exceptions import (
