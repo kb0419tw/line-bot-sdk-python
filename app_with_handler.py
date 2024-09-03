@@ -92,7 +92,7 @@ def handle_message(event):
         #    temperature=0.7,
         #)
         response = openai.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=[
               {"role": "system", "content": AI_GUIDELINES},
               {"role": "user", "content": user_message}
@@ -102,7 +102,8 @@ def handle_message(event):
         )
 
         # 提取并整理回复内容
-        ai_reply = response.choices[0].message['content']
+        ai_reply = response.choices[0].message.content
+         
 
     except Exception as e:
         # 处理任何异常并设置错误回复
