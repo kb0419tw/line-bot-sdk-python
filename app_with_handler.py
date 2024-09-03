@@ -106,7 +106,6 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=ai_reply)
         )
-    )
      
 #def message_text(event):
 #    with ApiClient(configuration) as api_client:
