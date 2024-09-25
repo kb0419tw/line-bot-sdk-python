@@ -84,25 +84,25 @@ def handle_message(event):
     prompt = f"{AI_GUIDELINES}\nUser: {user_message}\nAI:"
 
     try:
-        # 调用 OpenAI API 生成回复
-        #response = openai.chat.completions.create(
-        #    engine="gpt-4",  # 或者使用 gpt-4
-        #    prompt=prompt,
-        #    max_tokens=150,
-        #    temperature=0.7,
-        #)
+         调用 OpenAI API 生成回复
+        response = openai.chat.completions.create(
+            engine="gpt-4",  # 或者使用 gpt-4
+            prompt=prompt,
+            max_tokens=150,
+            temperature=0.7,
+        )
          
-        #response = openai.chat.completions.create(
-        #    model="gpt-4o-mini",
-        #    messages=[
-        #      {"role": "system", "content": AI_GUIDELINES},
-        #      {"role": "user", "content": user_message}
-        #    ],
-        #    max_tokens=150,
-        #    temperature=0.7
-        #)
-        #ai_reply = response.choices[0].message.content
-        ai_reply = "抱歉我有點不舒服，晚點再回覆喔。"
+        response = openai.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+              {"role": "system", "content": AI_GUIDELINES},
+              {"role": "user", "content": user_message}
+            ],
+            max_tokens=150,
+            temperature=0.7
+        )
+        ai_reply = response.choices[0].message.content
+        #ai_reply = "抱歉我有點不舒服，晚點再回覆喔。"
 
     except Exception as e:
         # 处理任何异常并设置错误回复
