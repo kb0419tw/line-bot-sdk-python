@@ -90,13 +90,7 @@ def handle_message(event):
             line_bot_api.reply_message_with_http_info(
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
-                    messages=[image_message]
-                )
-            )
-            line_bot_api.reply_message_with_http_info(
-                ReplyMessageRequest(
-                    reply_token=event.reply_token,
-                    messages=[TextMessage(text="Invite your good friends to get to know Mia!\nhttps://lin.ee/ZsYIo32")]
+                    messages=[image_message,"Invite your good friends to get to know Mia!\nhttps://lin.ee/ZsYIo32"]
                 )
             )
     else:
