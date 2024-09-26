@@ -93,7 +93,7 @@ def handle_message(event):
           
     if user_message == 'Please tell me the latest news about Mia.':
         image_message = ImageMessage(
-            original_content_url='https://drive.google.com/uc?export=view&id=1qsZmTBWYaDHN6whsICbqrJtFOWKkPg3h',
+            original_content_url='https://drive.google.com/uc?export=view&id=1xiuRLm1GsCgoH4qvqQi9NVS_frXKXtyW',
             preview_image_url='https://drive.google.com/uc?export=view&id=17Yk0YWrbo8qD02TXp3_KSCvFJShyG3A-'
         )
         with ApiClient(configuration) as api_client:
