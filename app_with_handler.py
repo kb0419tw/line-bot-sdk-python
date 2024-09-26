@@ -36,7 +36,7 @@ from linebot.v3.messaging import (
     TextMessage
 )
 
-from linebot.v3.messaging.models.send_messages import ImageSendMessage
+from linebot.v3.messaging.models.image_message import ImageMessage
 
 app = Flask(__name__)
 
@@ -81,7 +81,7 @@ def handle_message(event):
     user_message = event.message.text
 
     if user_message == 'Please tell me the latest news about Mia.':
-        image_message = ImageSendMessage(
+        image_message = ImageMessage(
             original_content_url='https://drive.google.com/file/d/1qsZmTBWYaDHN6whsICbqrJtFOWKkPg3h/view?usp=sharing',
             preview_image_url='https://drive.google.com/file/d/1qsZmTBWYaDHN6whsICbqrJtFOWKkPg3h/view?usp=sharing'
         )
