@@ -33,9 +33,10 @@ from linebot.v3.messaging import (
     ApiClient,
     MessagingApi,
     ReplyMessageRequest,
-    TextMessage,
-    ImageSendMessage
+    TextMessage
 )
+
+from linebot.v3.models.send_messages import ImageSendMessage
 
 app = Flask(__name__)
 
