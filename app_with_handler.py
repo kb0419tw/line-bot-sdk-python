@@ -80,7 +80,7 @@ def callback():
 def handle_message(event):
     user_message = event.message.text
 
-    if len(user_message) > 10:
+    if len(user_message) > 200:
         with ApiClient(configuration) as api_client:
             line_bot_api = MessagingApi(api_client)
             line_bot_api.reply_message_with_http_info(
