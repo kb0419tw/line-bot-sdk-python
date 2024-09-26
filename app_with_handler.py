@@ -90,7 +90,7 @@ def handle_message(event):
             line_bot_api.reply_message_with_http_info(
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
-                    messages=[image_message,"Invite your good friends to get to know Mia!\nhttps://lin.ee/ZsYIo32"]
+                    messages=[image_message,TextMessage(text="Invite your good friends to get to know Mia!\nhttps://lin.ee/ZsYIo32")]
                 )
             )
     else:
@@ -112,7 +112,7 @@ def handle_message(event):
 
         except Exception as e:
             # 处理任何异常并设置错误回复
-            ai_reply = "你可以到這個網站取得相關資訊哦：\nhttps://ifi.immigration.gov.tw/wSite/mp?mp=1"
+            ai_reply = "You can find relevant information on this website:\nhttps://ifi.immigration.gov.tw/wSite/mp?mp=1"
             print(f"Error: {e}")
 
         # 使用 Line Messaging API 将 AI 的回复发送给用户
