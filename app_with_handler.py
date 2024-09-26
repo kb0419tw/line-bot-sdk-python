@@ -80,6 +80,17 @@ def callback():
 def handle_message(event):
     user_message = event.message.text
 
+    if len(user_message) > 10:
+        with ApiClient(configuration) as api_client:
+            line_bot_api = MessagingApi(api_client)
+            line_bot_api.reply_message_with_http_info(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[TextMessage(text="請將問題字數縮短至200字元內，以獲得更快的回應。\nPlease simplify your question to within 200 characters.")]
+                )
+            )
+        return
+          
     if user_message == 'Please tell me the latest news about Mia.':
         image_message = ImageMessage(
             original_content_url='https://drive.google.com/uc?export=view&id=1qsZmTBWYaDHN6whsICbqrJtFOWKkPg3h',
@@ -106,7 +117,7 @@ def handle_message(event):
                 {"role": "user", "content": user_message}
             ],
             max_tokens=150,
-            temperature=0.7
+            temperature=0.4
             )
             ai_reply = response.choices[0].message.content
 
