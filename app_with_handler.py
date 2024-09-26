@@ -94,7 +94,7 @@ def handle_message(event):
     if user_message == 'Please tell me the latest news about Mia.':
         image_message = ImageMessage(
             original_content_url='https://drive.google.com/uc?export=view&id=1qsZmTBWYaDHN6whsICbqrJtFOWKkPg3h',
-            preview_image_url='https://drive.google.com/uc?export=view&id=1qsZmTBWYaDHN6whsICbqrJtFOWKkPg3h'
+            preview_image_url='https://drive.google.com/uc?export=view&id=17Yk0YWrbo8qD02TXp3_KSCvFJShyG3A-'
         )
         with ApiClient(configuration) as api_client:
             line_bot_api = MessagingApi(api_client)
