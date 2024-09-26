@@ -93,7 +93,6 @@ def handle_message(event):
                     messages=[image_message]
                 )
             )
-            line_bot_api = MessagingApi(api_client)
             line_bot_api.reply_message_with_http_info(
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
