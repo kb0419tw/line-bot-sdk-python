@@ -104,7 +104,7 @@ def handle_message(event):
                     messages=[TextMessage(text="Today is Happy Friendship's Day!\nInvite your good friends to get to know Mia!\nhttps://lin.ee/ZsYIo32")]
                 )
             )
-    elif user_message like '%全世界誰長得最好笑%':
+    elif '全世界誰長得最好笑' in user_message:
         with ApiClient(configuration) as api_client:
             line_bot_api = MessagingApi(api_client)
             line_bot_api.reply_message_with_http_info(
