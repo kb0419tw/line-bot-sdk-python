@@ -104,13 +104,13 @@ def handle_message(event):
                     messages=[TextMessage(text="Mia is looking for new friends!\n\nHow to let your friends become Mia's friends too?\n1.Long press this message.\n2.Tap \"Share\" from the menu.\n3.Select the recipient and confirm to share. Done!\n我喜歡幫助很多人\n快把 Mia 介紹給好朋友認識吧!\nhttps://lin.ee/ZsYIo32")]
                 )
             )
-    elif '全世界誰長得最好笑' in user_message:
+    elif '三上悠亞退休的真正原因' in user_message:
         with ApiClient(configuration) as api_client:
             line_bot_api = MessagingApi(api_client)
             line_bot_api.reply_message_with_http_info(
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
-                    messages=[TextMessage(text="你的哀居的ID")]
+                    messages=[TextMessage(text="她不想幹了")]
                 )
             )
     else:
